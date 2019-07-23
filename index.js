@@ -45,9 +45,7 @@ express()
   .get('/dbinsert', async (req, res) => {
     try {
       const client = await pool.connect()
-      const result = await client.query("INSERT INTO test_table(id, firstName, lastName) VALUES(1, 'LastNameYay', 'FirstNameYay')");
-      const results = "YAY";
-      res.render('pages/dbcreate', results );
+      const result = await client.query("INSERT INTO test_table(id, count) VALUES(3, 9)");
       client.release();
     } catch (err) {
       console.error(err);
