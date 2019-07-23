@@ -80,7 +80,7 @@ express()
         } else {
           currentitem = result.rows[0];
           newcount = currentitem.count + 1;
-          res.send("Old count:" currentitem.count)
+          res.send("Old count:" + currentitem.count)
         }
       })
  
