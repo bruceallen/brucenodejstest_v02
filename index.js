@@ -84,7 +84,7 @@ express()
       res.send("Error " + err);
     }
   })
-
+/*
   .get('/dbadd', async (req, res) => {
     try {
       const client = await pool.connect()
@@ -115,5 +115,5 @@ express()
       res.send("Error " + err);
     }
   })
-
+*/
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
