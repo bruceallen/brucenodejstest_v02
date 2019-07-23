@@ -31,7 +31,8 @@ express()
     try {
       const client = await pool.connect()
       const result1 = await client.query("DROP TABLE test_table");    
-      res.send("Drop that DB man");
+      const result2 = await client.query("DROP TABLE phrase_table");    
+      res.send("Database cleared");
       client.release();
     } catch (err) {
       console.error(err);
@@ -61,7 +62,8 @@ express()
     try {
       const client = await pool.connect()
       const result = await client.query("CREATE TABLE test_table(id SERIAL PRIMARY KEY, count INT)");
-      res.send("MADE IT dude!");
+      const result2 = await client.query("CREATE TABLE phrase_table(id SERIAL PRIMARY KEY, phrase TEXT)");
+      res.send("Created tables inside database");
       client.release();
     } catch (err) {
       console.error(err);
@@ -72,8 +74,7 @@ express()
   .get('/dbinsert', async (req, res) => {
     try {
       const client = await pool.connect()
-      const oldcount = await client.query('SELECT * FROM test_table');
-      
+      const oldcount = await client.query('SELECT * FROM test_table');      
       const result = await client.query("INSERT INTO test_table(id, count) VALUES(1, 1)");
       const results = { 'results': (result) ? result.rows : null};
       res.render('pages/db', results );
@@ -96,12 +97,14 @@ express()
         }
       })
  
+      newphrase = "LITTLE TURTLE NUMBER " + newcount;
+      
       const result1 = await client.query("DROP TABLE test_table");
       const result2 = await client.query("CREATE TABLE test_table(id SERIAL PRIMARY KEY, count INT)");
       const result3 = await client.query("INSERT INTO test_table(id, count) VALUES(1," + newcount + ")");
 
-    //  res.send("Old count:" + currentitem.count + "New count:" + newcount);
-
+      const result4 = await client.query("INSERT INTO phrase_table(id, count) VALUES(" + newcount + "," + newphrase + ")");
+ 
       res.writeHead(200, {'Content-Type': 'text/html'});
       res.write('<b>Hey there!</b><br /><br />This is the default response. You are visitor #: ' + newcount);
       res.end();
