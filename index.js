@@ -102,9 +102,9 @@ express()
 
     //  res.send("Old count:" + currentitem.count + "New count:" + newcount);
 
-      response.writeHead(200, {'Content-Type': 'text/html'});
-      response.write('<b>Hey there!</b><br /><br />This is the default response. You are visitor: ' + newcount);
-      response.end();
+      res.writeHead(200, {'Content-Type': 'text/html'});
+      res.write('<b>Hey there!</b><br /><br />This is the default response. You are visitor #: ' + newcount);
+      res.end();
       
       client.release();
     } catch (err) {
