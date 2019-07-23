@@ -69,6 +69,21 @@ express()
     }
   })
 
+  .get('/dbinsert', async (req, res) => {
+    try {
+      const client = await pool.connect()
+      const oldcount = await client.query('SELECT * FROM test_table');
+      
+      const result = await client.query("INSERT INTO test_table(id, count) VALUES(1, 1)");
+      const results = { 'results': (result) ? result.rows : null};
+      res.render('pages/db', results );
+      client.release();
+    } catch (err) {
+      console.error(err);
+      res.send("Error " + err);
+    }
+  })
+
   .get('/dbadd', async (req, res) => {
     try {
       const client = await pool.connect()
@@ -85,23 +100,12 @@ express()
       const result2 = await client.query("CREATE TABLE test_table(id SERIAL PRIMARY KEY, count INT)");
       const result3 = await client.query("INSERT INTO test_table(id, count) VALUES(1," + newcount + ")");
 
-      res.send("Old count:" + currentitem.count + "New count:" + newcount);
+    //  res.send("Old count:" + currentitem.count + "New count:" + newcount);
 
-      client.release();
-    } catch (err) {
-      console.error(err);
-      res.send("Error " + err);
-    }
-  })
-
-  .get('/dbinsert', async (req, res) => {
-    try {
-      const client = await pool.connect()
-      const oldcount = await client.query('SELECT * FROM test_table');
+      response.writeHead(200, {'Content-Type': 'text/html'});
+      response.write('<b>Hey there!</b><br /><br />This is the default response. You are visitor: ' + newcount);
+      response.end();
       
-      const result = await client.query("INSERT INTO test_table(id, count) VALUES(1, 1)");
-      const results = { 'results': (result) ? result.rows : null};
-      res.render('pages/db', results );
       client.release();
     } catch (err) {
       console.error(err);
