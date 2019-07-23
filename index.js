@@ -90,8 +90,8 @@ express()
       })
  
       const result1 = await client.query("DROP TABLE test_table");
-      const result = await client.query("CREATE TABLE test_table(id SERIAL PRIMARY KEY, count INT)");
-      const result = await client.query("INSERT INTO test_table(id, count) VALUES(1," + newcount + ")");
+      const result2 = await client.query("CREATE TABLE test_table(id SERIAL PRIMARY KEY, count INT)");
+      const result3 = await client.query("INSERT INTO test_table(id, count) VALUES(1," + newcount + ")");
       
       client.release();
     } catch (err) {
