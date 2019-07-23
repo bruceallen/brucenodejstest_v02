@@ -42,4 +42,17 @@ express()
     }
   })
 
+  .get('/dbinsert', async (req, res) => {
+    try {
+      const client = await pool.connect()
+      const result = await client.query("INSERT INTO users(id, firsName, lastName) VALUES(1, 'LastNameYay', 'FirstNameYay')");
+      const results = "YAY";
+      res.render('pages/dbcreate', results );
+      client.release();
+    } catch (err) {
+      console.error(err);
+      res.send("Error " + err);
+    }
+  })
+
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
