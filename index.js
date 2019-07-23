@@ -19,7 +19,7 @@ express()
   .get('/db', async (req, res) => {
     try {
       const client = await pool.connect()
-      const result = await client.query('SELECT id::string, count::string FROM test_table');
+      const result = await client.query('SELECT * FROM test_table');
       const results = { 'results': (result) ? result.rows : null};
       res.render('pages/db', results );
       client.release();
@@ -45,14 +45,15 @@ express()
   .get('/dbread', async (req, res) => {
     try {
       const client = await pool.connect()
-      const oldthing = await client.query("SELECT * FROM test_table");
-//      client.query("SELECT * FROM test_table", function (err, result, fields) {
-//        console.error("THINGY START");
-//        console.error(result);
-//        console.error("THINGY END");
-//      }
-      res.send("READ it man:" + oldthing.rows[0]);
-      console.error("READ IT:" + oldthing.rows[0]);     
+      client.query("SELECT * FROM test_table", function (err, result, fields) {
+        if (err) {
+          console.error("UHUH");
+        } else {
+          console.error("READ:");
+          console.error(res.rows[0]);
+          console.error("READ END");
+        }
+      })
       client.release();
     } catch (err) {
       console.error(err);
