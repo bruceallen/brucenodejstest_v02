@@ -46,8 +46,8 @@ express()
     try {
       const client = await pool.connect()
       const oldthing = await client.query('SELECT * FROM test_table');
-      res.send("READ it man:" + oldthing);
-      console.error("READ IT:" + oldthing);     
+      res.send("READ it man:" + oldthing.fields);
+      console.error("READ IT:" + oldthing.fields);     
       client.release();
     } catch (err) {
       console.error(err);
