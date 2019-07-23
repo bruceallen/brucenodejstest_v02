@@ -32,9 +32,9 @@ express()
   .get('/dbcreate', async (req, res) => {
     try {
       const client = await pool.connect()
-      const result = await client.query("CREATE TABLE test_table(id SERIAL PRIMARY KEY, firstName VARCHAR(40) NOT NULL, lastName VARCHAR(40) NOT NULL)");
-      const results = "YAY";
-      res.render('pages/dbcreate', results );
+      const result1 = await client.query("DROP TABLE test_table");
+      const result2 = await client.query("CREATE TABLE test_table(id SERIAL PRIMARY KEY, count INT)");
+//      res.render('pages/dbcreate', );
       client.release();
     } catch (err) {
       console.error(err);
