@@ -29,4 +29,17 @@ express()
     }
   })
 
+  .get('/dbcreate', async (req, res) => {
+    try {
+      const client = await pool.connect()
+      const result = await client.query("CREATE TABLE test_table(id SERIAL PRIMARY KEY, firstName VARCHAR(40) NOT NULL, lastName VARCHAR(40) NOT NULL)");
+      const results = { 'YAY' };
+      res.render('pages/dbcreate', results );
+      client.release();
+    } catch (err) {
+      console.error(err);
+      res.send("Error " + err);
+    }
+  })
+
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
