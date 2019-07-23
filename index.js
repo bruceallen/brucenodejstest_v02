@@ -33,7 +33,7 @@ express()
     try {
       const client = await pool.connect()
       const result = await client.query("CREATE TABLE test_table(id SERIAL PRIMARY KEY, firstName VARCHAR(40) NOT NULL, lastName VARCHAR(40) NOT NULL)");
-      const results = { 'YAY' };
+      const results = "YAY";
       res.render('pages/dbcreate', results );
       client.release();
     } catch (err) {
