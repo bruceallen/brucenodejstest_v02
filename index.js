@@ -45,14 +45,14 @@ express()
   .get('/dbread', async (req, res) => {
     try {
       const client = await pool.connect()
-//      const oldthing = await client.query("SELECT * FROM test_table");
-      client.query("SELECT * FROM test_table", function (err, result, fields) {
-        console.error("THINGY START");
-        console.error(result);
-        console.error("THINGY END");
-      }
-      res.send("READ it man:" + oldthing.fields);
-      console.error("READ IT:" + oldthing.fields);     
+      const oldthing = await client.query("SELECT * FROM test_table");
+//      client.query("SELECT * FROM test_table", function (err, result, fields) {
+//        console.error("THINGY START");
+//        console.error(result);
+//        console.error("THINGY END");
+//      }
+      res.send("READ it man:" + oldthing.rows[0]);
+      console.error("READ IT:" + oldthing.rows[0]);     
       client.release();
     } catch (err) {
       console.error(err);
