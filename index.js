@@ -33,7 +33,7 @@ express()
     try {
       const client = await pool.connect()
       const oldcount = await client.query('SELECT * FROM test_table');
-      console.error("ERRORBOY " + oldcount[1].count);     
+      console.error("ERRORBOY " + oldcount[1]);     
       const result1 = await client.query("DROP TABLE test_table");
       const result2 = await client.query("CREATE TABLE test_table(id SERIAL PRIMARY KEY, count INT)");
       const results = { 'results': (result) ? result2.rows : null};
