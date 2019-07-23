@@ -50,7 +50,7 @@ express()
           console.error("UHUH");
         } else {
           console.error("READ:");
-          console.error(res.rows[0]);
+          console.error(result.rows[0]);
           console.error("READ END");
         }
       })
