@@ -77,14 +77,22 @@ express()
     }
   })
 
-  .get('/dbmore', async (req, res) => {
+  .get('/dbadd', async (req, res) => {
     try {
       const client = await pool.connect()
-      const oldcount = await client.query('SELECT * FROM test_table');
-      console.error("ERRORBOY " + oldcount[1].count);     
-      const result2 = await client.query("CREATE TABLE test_table(id SERIAL PRIMARY KEY, count INT)");
-      const results = { 'results': (result) ? result2.rows : null};
-      res.render('pages/db', results );
+      client.query("SELECT * FROM test_table", function (err, result, fields) {
+        if (err) {
+          console.error("UHUH");
+        } else {
+          currentitem = result.rows[0];
+          newcount = currentitem.count + 1;
+        }
+      })
+ 
+      const result1 = await client.query("DROP TABLE test_table");
+      const result = await client.query("CREATE TABLE test_table(id SERIAL PRIMARY KEY, count INT)");
+      const result = await client.query("INSERT INTO test_table(id, count) VALUES(1," + newcount + ")");
+      
       client.release();
     } catch (err) {
       console.error(err);
@@ -97,7 +105,7 @@ express()
       const client = await pool.connect()
       const oldcount = await client.query('SELECT * FROM test_table');
       
-      const result = await client.query("INSERT INTO test_table(id, count) VALUES(3, 9)");
+      const result = await client.query("INSERT INTO test_table(id, count) VALUES(1, 1)");
       const results = { 'results': (result) ? result.rows : null};
       res.render('pages/db', results );
       client.release();
