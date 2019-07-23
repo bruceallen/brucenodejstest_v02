@@ -91,26 +91,31 @@ express()
       const client = await pool.connect()
       client.query("SELECT * FROM test_table", function (err, result, fields) {
         if (err) {
-          res.writeHead(200, {'Content-Type': 'text/html'});
-          res.write('<b>ERROR ADDING</b>');
-          res.end();
           console.error("UHUH");
         } else {
           currentitem = result.rows[0];
           newcount = currentitem.count + 1;
           newphrase = "LITTLE TURTLE NUMBER " + newcount;
-      
-          const result1 = await client.query("DROP TABLE test_table");
-          const result2 = await client.query("CREATE TABLE test_table(id SERIAL PRIMARY KEY, count INT)");
-          const result3 = await client.query("INSERT INTO test_table(id, count) VALUES(1," + newcount + ")");
-          const result4 = await client.query("INSERT INTO phrase_table(id, count) VALUES(" + newcount + "," + newphrase + ")");
- 
-          res.writeHead(200, {'Content-Type': 'text/html'});
-          res.write('<b>Hey there!</b><br /><br />This is the default response. You are visitor #: ' + newcount);
-          res.end();
         }
-      })      
-      client.release();
+      })
+      
+      if (err) {
+        res.writeHead(200, {'Content-Type': 'text/html'});
+        res.write('<b>ERROR ADDING</b>');
+        res.end();
+      } else {
+        
+//    const result1 = await client.query("DROP TABLE test_table");
+//    const result2 = await client.query("CREATE TABLE test_table(id SERIAL PRIMARY KEY, count INT)");
+//    const result3 = await client.query("INSERT INTO test_table(id, count) VALUES(1," + newcount + ")");
+//    const result4 = await client.query("INSERT INTO phrase_table(id, count) VALUES(" + newcount + "," + newphrase + ")");
+ 
+        res.writeHead(200, {'Content-Type': 'text/html'});
+        res.write('<b>Hey there!</b><br /><br />This is the default response. You are visitor #: ' + newcount);
+        res.end();
+        client.release();
+      }   
+      
     } catch (err) {
       console.error(err);
       res.send("Error " + err);
