@@ -32,8 +32,7 @@ express()
   .get('/dbclear', async (req, res) => {
     try {
       const client = await pool.connect()
-      const result1 = await client.query("DROP TABLE test_table");
-      console.error("DROPPED IT BRO");     
+      const result1 = await client.query("DROP TABLE test_table");    
       res.send("Drop that DB man");
       client.release();
     } catch (err) {
@@ -49,12 +48,8 @@ express()
         if (err) {
           console.error("UHUH");
         } else {
-          console.error("READ:");
-          console.error(result.rows[0]);
           currentitem = result.rows[0];
-          console.error("READ COUNT:");
-          console.error(currentitem.count);
-          console.error("READ END");
+          res.send("Current count:" + currentitem.count);
         }
       })
       client.release();
@@ -69,7 +64,6 @@ express()
       const client = await pool.connect()
       const result = await client.query("CREATE TABLE test_table(id SERIAL PRIMARY KEY, count INT)");
       res.send("MADE IT dude!");
-      console.error("MADE IT!");   
       client.release();
     } catch (err) {
       console.error(err);
@@ -86,13 +80,16 @@ express()
         } else {
           currentitem = result.rows[0];
           newcount = currentitem.count + 1;
+          res.send("Old count:" currentitem.count)
         }
       })
  
       const result1 = await client.query("DROP TABLE test_table");
       const result2 = await client.query("CREATE TABLE test_table(id SERIAL PRIMARY KEY, count INT)");
       const result3 = await client.query("INSERT INTO test_table(id, count) VALUES(1," + newcount + ")");
-      
+
+      res.send("New count:" + newcount);
+
       client.release();
     } catch (err) {
       console.error(err);
