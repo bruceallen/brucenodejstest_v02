@@ -8,8 +8,6 @@ const pool = new Pool({
   ssl: true
 });
 
-
-
 express()
   .use(express.static(path.join(__dirname, 'public')))
   .set('views', path.join(__dirname, 'views'))
@@ -80,7 +78,6 @@ express()
         } else {
           currentitem = result.rows[0];
           newcount = currentitem.count + 1;
-          res.send("Old count:" + currentitem.count)
         }
       })
  
@@ -88,7 +85,7 @@ express()
       const result2 = await client.query("CREATE TABLE test_table(id SERIAL PRIMARY KEY, count INT)");
       const result3 = await client.query("INSERT INTO test_table(id, count) VALUES(1," + newcount + ")");
 
-      res.send("New count:" + newcount);
+      res.send("Old count:" + currentitem.count + "New count:" + newcount);
 
       client.release();
     } catch (err) {
