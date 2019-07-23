@@ -58,10 +58,9 @@ express()
   .get('/dbcreate', async (req, res) => {
     try {
       const client = await pool.connect()
-      const result1 = await client.query("DROP TABLE test_table");
-      const result2 = await client.query("CREATE TABLE test_table(id SERIAL PRIMARY KEY, count INT)");
-      const results = { 'results': (result) ? result2.rows : null};
-      res.render('pages/db', results );
+      const result = await client.query("CREATE TABLE test_table(id SERIAL PRIMARY KEY, count INT)");
+      res.send("MADE IT dude!");
+      console.error("MADE IT!");   
       client.release();
     } catch (err) {
       console.error(err);
