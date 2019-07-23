@@ -51,6 +51,9 @@ express()
         } else {
           console.error("READ:");
           console.error(result.rows[0]);
+          currentitem = result.rows[0];
+          console.error("READ COUNT:");
+          console.error(currentitem.count);
           console.error("READ END");
         }
       })
