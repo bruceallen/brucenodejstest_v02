@@ -29,6 +29,19 @@ express()
     }
   })
 
+  .get('/dbclear', async (req, res) => {
+    try {
+      const client = await pool.connect()
+      const result1 = await client.query("DROP TABLE test_table");
+      console.error("DROPPED IT BRO");     
+      res.send("Drop that DB man");
+      client.release();
+    } catch (err) {
+      console.error(err);
+      res.send("Error " + err);
+    }
+  })
+
   .get('/dbcreate', async (req, res) => {
     try {
       const client = await pool.connect()
