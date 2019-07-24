@@ -366,7 +366,7 @@ express()
           console.error("UHUH");
         } else {
           currentitem = result.rows[0];          
-          bigphrase1 = bigphrase1 + '<b>count:</b><br /><br />Count: ' + currentitem.count + '<br />';    
+          bigphrase1 = '<b>count:</b><br /><br />Count: ' + currentitem.count + '<br />';    
         }
       })
       
@@ -374,7 +374,7 @@ express()
         if (perr) {
           console.error("UHUH");
         } else {
-          bigphrase = bigphrase + '<b>phrase list:</b>';
+          bigphrase2 = '<b>phrase list:</b>';
           currentphraseitem = presult.rows[0];
           if (currentphraseitem) {
             bigphrase2 = bigphrase2 + 'phraze iz ' + currentphraseitem.count;    
