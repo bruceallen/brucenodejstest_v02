@@ -57,7 +57,9 @@ express()
               console.error("UHUH");
             } else {
               currentitem = result.rows[0];
-               res.write('<b>item:</b> ' + currentitem.id + " <b>phrase:</b> " + currentitem.count);    
+              res.write('<b>phrase:</b> ' + currentitem.count);    
+
+              //               res.write('<b>item:</b> ' + currentitem.id + " <b>phrase:</b> " + currentitem.count);    
             }
           })
 
