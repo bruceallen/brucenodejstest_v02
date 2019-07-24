@@ -92,6 +92,9 @@ express()
       client.query("SELECT * FROM test_table", function (err, result, fields) {
         if (err) {
           console.error("UHUH");
+          res.writeHead(200, {'Content-Type': 'text/html'});
+          res.write('<b>ERROR ADDING</b>');
+          res.end();
         } else {
           currentitem = result.rows[0];
           newcount = currentitem.count + 1;
@@ -105,19 +108,7 @@ express()
           res.end();
           client.release();
         }
-      })
-      
-      if (err) {
-        res.writeHead(200, {'Content-Type': 'text/html'});
-        res.write('<b>ERROR ADDING</b>');
-        res.end();
-      } else {
-        
-//    const result1 = await client.query("DROP TABLE test_table");
-//    const result2 = await client.query("CREATE TABLE test_table(id SERIAL PRIMARY KEY, count INT)");
- 
-      }   
-      
+      })      
     } catch (err) {
       console.error(err);
       res.send("Error " + err);
