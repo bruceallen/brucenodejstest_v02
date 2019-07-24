@@ -320,6 +320,8 @@ var objectlist = ([
 // SERVER SIDE CODE
 
 var bigphrase = '';
+var bigphrase1 = 'line1:';
+var bigphrase2 = 'line2:';
 
 express()
   .use(express.static(path.join(__dirname, 'public')))
@@ -364,7 +366,7 @@ express()
           console.error("UHUH");
         } else {
           currentitem = result.rows[0];          
-          bigphrase = bigphrase + '<b>count:</b><br /><br />Count: ' + currentitem.count + '<br />';    
+          bigphrase1 = bigphrase1 + '<b>count:</b><br /><br />Count: ' + currentitem.count + '<br />';    
         }
       })
       
@@ -375,15 +377,17 @@ express()
           bigphrase = bigphrase + '<b>phrase list:</b>';
           currentphraseitem = presult.rows[0];
           if (currentphraseitem) {
-            bigphrase = bigphrase + 'phraze iz ' + currentphraseitem.count;    
+            bigphrase2 = bigphrase2 + 'phraze iz ' + currentphraseitem.count;    
           } else {
-            bigphrase = bigphrase + 'iz empty ';
+            bigphrase2 = bigphrase2 + 'iz empty ';
           }
         }
       })
       
       res.writeHead(200, {'Content-Type': 'text/html'});
       res.write(bigphrase);
+      res.write(bigphrase1);
+      res.write(bigphrase2);
       res.end();
 
       client.release();
