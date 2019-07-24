@@ -97,8 +97,8 @@ express()
           newcount = currentitem.count + 1;
           newphrase = "LITTLE TURTLE NUMBER " + newcount;
           
-          const result3 = await client.query("UPDATE test_table SET count = " + newcount + " WHERE id = 1");
-          const result4 = await client.query("INSERT INTO phrase_table(id, count) VALUES(" + newcount + "," + newphrase + ")");
+          const result3 = client.query("UPDATE test_table SET count = " + newcount + " WHERE id = 1");
+          const result4 = client.query("INSERT INTO phrase_table(id, count) VALUES(" + newcount + "," + newphrase + ")");
           
           res.writeHead(200, {'Content-Type': 'text/html'});
           res.write('<b>Hey there!</b><br /><br />This is the default response. You are visitor #: ' + newcount);
