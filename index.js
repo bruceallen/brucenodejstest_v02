@@ -367,14 +367,14 @@ express()
           bigphrase2 = '<b>phrase list:</b>';
           currentphraseitem = presult.rows[0];
           if (currentphraseitem) {
-            bigphrase2 = bigphrase2 + 'phraze iz ' + currentphraseitem.count;    
+            bigphrase2 = bigphrase2 + 'phraze iz ' + currentphraseitem.phrase;    
           } else {
             bigphrase2 = bigphrase2 + 'iz empty ';
           }
         }
-      res.writeHead(200, {'Content-Type': 'text/html'});
-      res.write(bigphrase);
-      res.end();   
+        res.writeHead(200, {'Content-Type': 'text/html'});
+        res.write(bigphrase2);
+        res.end();   
       })
       client.release();
       
