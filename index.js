@@ -444,10 +444,14 @@ express()
           const result4 = client.query(query2);
           
           res.writeHead(200, {'Content-Type': 'text/html'});
-          res.write(query1 + '<br />');
-          res.write(query2 + '<br />');
+          res.write('<center>');
           res.write(randomStatus + '<br> />');
-          res.write('<b>Hey there!</b><br /><br />This is the default response. You are visitor #: ' + newcount);
+          //          res.write(query1 + '<br />');
+//          res.write(query2 + '<br />');
+          res.write(randomStatus + '<br> />');
+//          res.write('<b>Hey there!</b><br /><br />This is the default response. You are visitor #: ' + newcount);
+          res.write('<br><br><br><button onclick="refreshPage()">Generate New PackCon Status</button><br><br></center>');
+          
           res.end();
           client.release();
         }
