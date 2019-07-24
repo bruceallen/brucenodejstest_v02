@@ -43,34 +43,32 @@ express()
 
   .get('/dbread', async (req, res) => {
     try {
+      bigphrase = 'DBREAD';
       const client = await pool.connect()
       client.query("SELECT * FROM test_table", function (err, result, fields) {
         if (err) {
           console.error("UHUH");
         } else {
           currentitem = result.rows[0];          
-          res.writeHead(200, {'Content-Type': 'text/html'});
-          res.write('<b>count:</b><br /><br />Count: ' + currentitem.count);    
-          res.end();
+          bigphrase = bigphrase + '<b>count:</b><br /><br />Count: ' + currentitem.count;    
           
           client.query("SELECT * FROM phrase_table", function (perr, presult, pfields) {
             if (perr) {
               console.error("UHUH");
             } else {
-              res.write('<b>phrase list:</b> ');    
-              res.end();
+              bigphrase = bigphrase + '<b>phrase list:</b>';
               currentphraseitem = presult.rows[0];
               if (currentphraseitem) {
-                res.write('<b>phrase:</b> ' + currentphraseitem.count);    
-                res.end();
+                bigphrase = bigphrase + 'phraze iz ' + currentphraseitem.count;    
               } else {
-                res.write('empty');    
-                res.end();
+                bigphrase = bigphrase + 'iz empty ';
               }
               //               res.write('<b>item:</b> ' + currentitem.id + " <b>phrase:</b> " + currentitem.count);    
             }
           })
 
+          res.writeHead(200, {'Content-Type': 'text/html'});
+          res.write(bigphrase);
           res.end();
 
         }
