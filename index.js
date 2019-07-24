@@ -356,7 +356,7 @@ express()
     }
   })
 
-  .get('/dbreadlist', async (req, res) => {
+  .get('/showdatabase', async (req, res) => {
     try {
       const client = await pool.connect()
  
@@ -364,16 +364,16 @@ express()
         if (perr) {
           console.error("UHUH");
         } else {
-          bigphrase2 = '<b>phrase list:</b><br />';
+          bigphrase2 = '<b>Database of all phrases generated so far:</b><br />';
 
           presultrows = presult.rows;
           
           for (var i = 0; i < presultrows.length; i++) {
            currentphraseitem = presultrows[i];
            if (currentphraseitem) {
-              bigphrase2 = bigphrase2 + 'phrase: ' + currentphraseitem.phrase + '<br />';    
+              bigphrase2 = bigphrase2 + 'phrase ' + (i+1) + ' : ' + currentphraseitem.phrase + '<br />';    
             } else {
-              bigphrase2 = bigphrase2 + 'iz empty ';
+              bigphrase2 = bigphrase2 + 'is empty (error?) <br />';
             }
           }
         }
@@ -389,6 +389,7 @@ express()
     }
   })
 
+/*
   .get('/dbread', async (req, res) => {
     try {
       bigphrase = 'DBREAD<br />';
@@ -407,7 +408,7 @@ express()
         if (perr) {
           console.error("UHUH");
         } else {
-          bigphrase2 = '<b>phrase list:</b>';
+          bigphrase2 = '<b> of all phrases generated:</b>';
           
           for (var currentphraseitem in presult.rows) {
 //          currentphraseitem = presult.rows[0];
@@ -433,6 +434,7 @@ express()
       res.send("Error " + err);
     }
   })
+*/
 
   .get('/dbcreate', async (req, res) => {
     try {
