@@ -429,12 +429,13 @@ express()
         } else {
           currentitem = result.rows[0];
           newcount = currentitem.count + 1;
-          newphrase = "'LITTLE TURTLE NUMBER " + newcount + "'";
+          
+          var randomStatus = (subject + ' ' + activity + ' ' + object + ' at #PackCon.');
+          newphrase = '' + randomStatus;        
+//          newphrase = "'LITTLE TURTLE NUMBER " + newcount + "'";
           
           query1 = "UPDATE test_table SET count = " + newcount + " WHERE id = 1";
           query2 = "INSERT INTO phrase_table(id, phrase) VALUES(" + newcount + ", " + newphrase + " )";
-   
-          var randomStatus = (subject + ' ' + activity + ' ' + object + ' at #PackCon.');
 
           const result3 = client.query(query1);
           const result4 = client.query(query2);
