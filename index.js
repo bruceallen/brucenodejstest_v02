@@ -49,7 +49,19 @@ express()
           console.error("UHUH");
         } else {
           currentitem = result.rows[0];
+          
+          res.writeHead(200, {'Content-Type': 'text/html'});
+          res.write('<b>count:</b><br /><br />Count: ' + currentitem.count);
+          
           res.send("Current count:" + currentitem.count);
+        }
+      })
+      client.query("SELECT * FROM test_table", function (err, result, fields) {
+        if (err) {
+          console.error("UHUH");
+        } else {
+          currentitem = result.rows[0];
+          res.end();
         }
       })
       client.release();
