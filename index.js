@@ -52,12 +52,12 @@ express()
           res.writeHead(200, {'Content-Type': 'text/html'});
           res.write('<b>count:</b><br /><br />Count: ' + currentitem.count);    
           
-          client.query("SELECT * FROM phrase_table", function (err, result, fields) {
-            if (err) {
+          client.query("SELECT * FROM phrase_table", function (perr, presult, pfields) {
+            if (perr) {
               console.error("UHUH");
             } else {
-              currentitem = result.rows[0];
-              res.write('<b>phrase:</b> ' + currentitem.count);    
+              currentphraseitem = presult.rows[0];
+              res.write('<b>phrase:</b> ' + currentphraseitem.count);    
 
               //               res.write('<b>item:</b> ' + currentitem.id + " <b>phrase:</b> " + currentitem.count);    
             }
