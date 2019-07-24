@@ -358,9 +358,10 @@ express()
           for (var i = 0; i < presultrows.length; i++) {
            currentphraseitem = presultrows[i];
            if (currentphraseitem) {
-              bigphrase2 += 'at ' + currentphraseitem.createtime + ' | ';
               bigphrase2 += 'phrase ' + (i+1) + ' : ';
-              bigphrase2 += currentphraseitem.phrase + '<br />';    
+              bigphrase2 += '<b>' + currentphraseitem.phrase + '</b>';    
+              bigphrase2 += ' | at ' + currentphraseitem.createtime;
+              bigphrase2 += '<br />';
             } else {
               bigphrase2 = bigphrase2 + 'is empty (error?) <br />';
             }
