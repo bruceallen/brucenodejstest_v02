@@ -403,11 +403,14 @@ express()
           console.error("UHUH");
         } else {
           bigphrase2 = '<b>phrase list:</b>';
-          currentphraseitem = presult.rows[0];
-          if (currentphraseitem) {
-            bigphrase2 = bigphrase2 + 'phraze iz ' + currentphraseitem.count;    
-          } else {
-            bigphrase2 = bigphrase2 + 'iz empty ';
+          
+          for (var currentphraseitem in presult.rows) {
+//          currentphraseitem = presult.rows[0];
+            if (currentphraseitem) {
+              bigphrase2 = bigphrase2 + 'phraze iz ' + currentphraseitem.count;    
+            } else {
+              bigphrase2 = bigphrase2 + 'iz empty ';
+            }
           }
         }
       })
