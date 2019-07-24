@@ -98,7 +98,7 @@ express()
     try {
       const client = await pool.connect()
       const oldcount = await client.query('SELECT * FROM test_table');      
-      const result = await client.query("INSERT INTO test_table(id, count) VALUES(1, 1)");
+      const result = await client.query("INSERT INTO test_table(id, count) VALUES(1, 0)");
       const results = { 'results': (result) ? result.rows : null};
       res.render('pages/db', results );
       client.release();
