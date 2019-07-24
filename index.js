@@ -364,9 +364,9 @@ express()
         if (perr) {
           console.error("UHUH");
         } else {
-          bigphrase2 = '<b>phrase list:</b>';
+          bigphrase2 = '<b>phrase list:</b><br />';
 
-          for (var currentphraseitem in presult.rows) {
+          for (var currentphraseitem in presult) {
 //          currentphraseitem = presult.rows[0];
            if (currentphraseitem) {
               bigphrase2 = bigphrase2 + 'phrase: ' + currentphraseitem.phrase + '<br />';    
