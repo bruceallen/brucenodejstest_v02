@@ -123,10 +123,10 @@ express()
           newphrase = "'LITTLE TURTLE NUMBER " + newcount + "'";
           
           query1 = "UPDATE test_table SET count = " + newcount + " WHERE id = 1";
-          query2 = "INSERT INTO phrase_table(id, count) VALUES(" + newcount + ", " + newphrase + " )";
+          query2 = "INSERT INTO phrase_table(id, phrase) VALUES(" + newcount + ", " + newphrase + " )";
           
-          const result3 = client.query("UPDATE test_table SET count = " + newcount + " WHERE id = 1");
-          const result4 = client.query("INSERT INTO phrase_table(id, count) VALUES(" + newcount + ", " + newphrase + " )");
+          const result3 = client.query(query1);
+          const result4 = client.query(query2);
           
           res.writeHead(200, {'Content-Type': 'text/html'});
           res.write(query1 + '<br />');
