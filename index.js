@@ -366,8 +366,10 @@ express()
         } else {
           bigphrase2 = '<b>phrase list:</b><br />';
 
-          for (var currentphraseitem in presult) {
-//          currentphraseitem = presult.rows[0];
+          presultrows = presult.rows;
+          
+          for (var i = 0; i < presultrows.length; i++) {
+           currentphraseitem = presultrows[i];
            if (currentphraseitem) {
               bigphrase2 = bigphrase2 + 'phrase: ' + currentphraseitem.phrase + '<br />';    
             } else {
