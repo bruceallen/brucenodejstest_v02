@@ -328,7 +328,7 @@ express()
   .set('views', path.join(__dirname, 'views'))
   .set('view engine', 'ejs')
 
-  .get('/', (req, res) => res.render('pages/index'))
+//  .get('/', (req, res) => res.render('pages/index'))
 
   .get('/db', async (req, res) => {
     try {
@@ -463,7 +463,7 @@ express()
     }
   })
 
-  .get('/dbadd', async (req, res) => {
+  .get('/', async (req, res) => {
     try {
       const client = await pool.connect()
       client.query("SELECT * FROM test_table", function (err, result, fields) {
