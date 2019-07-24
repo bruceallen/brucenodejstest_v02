@@ -431,7 +431,7 @@ express()
           newcount = currentitem.count + 1;
           
           var randomStatus = (subject + ' ' + activity + ' ' + object + ' at #PackCon.');
-          newphrase = '' + randomStatus;        
+          newphrase = "'" + randomStatus + "'";        
 //          newphrase = "'LITTLE TURTLE NUMBER " + newcount + "'";
           
           query1 = "UPDATE test_table SET count = " + newcount + " WHERE id = 1";
