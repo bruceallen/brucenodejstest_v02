@@ -409,7 +409,7 @@ express()
           newphrase = "'" + randomStatus + "'";        
           
           query1 = "UPDATE test_table SET count = " + newcount + " WHERE id = 1";
-          query2 = "INSERT INTO phrase_table(id, phrase) VALUES(" + newcount + ", " + newphrase + "," + "CURRENT_TIMESTAMP" + " )";
+          query2 = "INSERT INTO phrase_table(id, phrase, createtime) VALUES(" + newcount + ", " + newphrase + "," + "CURRENT_TIMESTAMP" + " )";
 
           const result3 = client.query(query1);
           const result4 = client.query(query2);
