@@ -51,17 +51,21 @@ express()
           currentitem = result.rows[0];          
           res.writeHead(200, {'Content-Type': 'text/html'});
           res.write('<b>count:</b><br /><br />Count: ' + currentitem.count);    
+          res.end();
           
           client.query("SELECT * FROM phrase_table", function (perr, presult, pfields) {
             if (perr) {
               console.error("UHUH");
             } else {
               res.write('<b>phrase list:</b> ');    
+              res.end();
               currentphraseitem = presult.rows[0];
               if (currentphraseitem) {
                 res.write('<b>phrase:</b> ' + currentphraseitem.count);    
+                res.end();
               } else {
                 res.write('empty');    
+                res.end();
               }
               //               res.write('<b>item:</b> ' + currentitem.id + " <b>phrase:</b> " + currentitem.count);    
             }
