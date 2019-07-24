@@ -56,9 +56,13 @@ express()
             if (perr) {
               console.error("UHUH");
             } else {
+              res.write('<b>phrase list:</b> ');    
               currentphraseitem = presult.rows[0];
-              res.write('<b>phrase:</b> ' + currentphraseitem.count);    
-
+              if (currentphraseitem.count) {
+                res.write('<b>phrase:</b> ' + currentphraseitem.count);    
+              } else {
+                res.write('empty');    
+              }
               //               res.write('<b>item:</b> ' + currentitem.id + " <b>phrase:</b> " + currentitem.count);    
             }
           })
