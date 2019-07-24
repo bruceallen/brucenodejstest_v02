@@ -54,12 +54,13 @@ express()
           res.end();
           
           client.query("SELECT * FROM test_table", function (err, result, fields) {
-          if (err) {
-            console.error("UHUH");
-          } else {
-            currentitem = result.rows[0];
-          }
-        })
+            if (err) {
+              console.error("UHUH");
+            } else {
+              currentitem = result.rows[0];
+            }
+          })
+        }
       })
 
       client.release();
