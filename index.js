@@ -19,7 +19,7 @@ function pickRandom(argument) {
   }
 }
 
-var subject = pickRandom([
+var subjectlist = ([
 'BONNIE HE',
 'The Pack',
 'THE OINTMENT',
@@ -315,6 +315,8 @@ var object = pickRandom([
 'HELL KROSS' 
 ]);
 
+//
+
 // SERVER SIDE CODE
 
 express()
@@ -430,7 +432,8 @@ express()
           currentitem = result.rows[0];
           newcount = currentitem.count + 1;
           
-          var randomStatus = (subject + ' ' + activity + ' ' + object + ' at #PackCon.');
+//          pickRandom
+          var randomStatus = (pickRandom(subjectlist) + ' ' + activity + ' ' + object + ' at #PackCon.');
           newphrase = "'" + randomStatus + "'";        
 //          newphrase = "'LITTLE TURTLE NUMBER " + newcount + "'";
           
