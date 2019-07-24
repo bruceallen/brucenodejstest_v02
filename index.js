@@ -382,7 +382,7 @@ express()
       const result1 = await client.query("DROP TABLE test_table");    
       const result2 = await client.query("DROP TABLE phrase_table");    
       const result3 = await client.query("CREATE TABLE test_table(id SERIAL PRIMARY KEY, count INT)");
-      const result4 = await client.query("CREATE TABLE phrase_table(id SERIAL PRIMARY KEY, phrase TEXT)");
+      const result4 = await client.query("CREATE TABLE phrase_table(id SERIAL PRIMARY KEY, phrase TEXT, createtime TIMESTAMP)");
       const result5 = await client.query("INSERT INTO test_table(id, count) VALUES(1, 0)");
       res.send("Reset!");
       client.release();
@@ -409,7 +409,7 @@ express()
           newphrase = "'" + randomStatus + "'";        
           
           query1 = "UPDATE test_table SET count = " + newcount + " WHERE id = 1";
-          query2 = "INSERT INTO phrase_table(id, phrase) VALUES(" + newcount + ", " + newphrase + " )";
+          query2 = "INSERT INTO phrase_table(id, phrase) VALUES(" + newcount + ", " + newphrase + "," + "CURRENT_TIMESTAMP" + " )";
 
           const result3 = client.query(query1);
           const result4 = client.query(query2);
