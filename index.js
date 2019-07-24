@@ -468,15 +468,12 @@ express()
   .get('/secretreset', async (req, res) => {
     try {
       const client = await pool.connect()
-      
       const result1 = await client.query("DROP TABLE test_table");    
       const result2 = await client.query("DROP TABLE phrase_table");    
       const result3 = await client.query("CREATE TABLE test_table(id SERIAL PRIMARY KEY, count INT)");
       const result4 = await client.query("CREATE TABLE phrase_table(id SERIAL PRIMARY KEY, phrase TEXT)");
       const result5 = await client.query("INSERT INTO test_table(id, count) VALUES(1, 0)");
-
-      res.send("Reset! " + err);
-      
+      res.send("Reset!");
       client.release();
     } catch (err) {
       console.error(err);
