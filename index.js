@@ -356,6 +356,34 @@ express()
     }
   })
 
+  .get('/dbreadlist', async (req, res) => {
+    try {
+      const client = await pool.connect()
+ 
+      client.query("SELECT * FROM phrase_table", function (perr, presult, pfields) {
+        if (perr) {
+          console.error("UHUH");
+        } else {
+          bigphrase2 = '<b>phrase list:</b>';
+          currentphraseitem = presult.rows[0];
+          if (currentphraseitem) {
+            bigphrase2 = bigphrase2 + 'phraze iz ' + currentphraseitem.count;    
+          } else {
+            bigphrase2 = bigphrase2 + 'iz empty ';
+          }
+        }
+      res.writeHead(200, {'Content-Type': 'text/html'});
+      res.write(bigphrase);
+      res.end();   
+      })
+      client.release();
+      
+    } catch (err) {
+      console.error(err);
+      res.send("Error " + err);
+    }
+  })
+
   .get('/dbread', async (req, res) => {
     try {
       bigphrase = 'DBREAD<br />';
