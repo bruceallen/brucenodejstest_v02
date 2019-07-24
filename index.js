@@ -46,19 +46,12 @@ express()
       bigphrase = 'DBREAD<br />';
       const client = await pool.connect()
 
-      res.writeHead(200, {'Content-Type': 'text/html'});
-      res.write(bigphrase);
-      res.end();
-
       client.query("SELECT * FROM test_table", function (err, result, fields) {
         if (err) {
           console.error("UHUH");
         } else {
           currentitem = result.rows[0];          
           bigphrase = bigphrase + '<b>count:</b><br /><br />Count: ' + currentitem.count + '<br />';    
-
-          res.write(bigphrase);
-          res.end();
         }
       })
       
@@ -73,11 +66,12 @@ express()
           } else {
             bigphrase = bigphrase + 'iz empty ';
           }
-
-          res.write(bigphrase);
-          res.end();
         }
       })
+      
+      res.writeHead(200, {'Content-Type': 'text/html'});
+      res.write(bigphrase);
+      res.end();
 
       client.release();
       
@@ -128,10 +122,15 @@ express()
           newcount = currentitem.count + 1;
           newphrase = "'LITTLE TURTLE NUMBER " + newcount + "'";
           
+          query1 = ("UPDATE test_table SET count = " + newcount + " WHERE id = 1"
+          query2 = "INSERT INTO phrase_table(id, count) VALUES(" + newcount + ", " + newphrase + "
+          
           const result3 = client.query("UPDATE test_table SET count = " + newcount + " WHERE id = 1");
           const result4 = client.query("INSERT INTO phrase_table(id, count) VALUES(" + newcount + ", " + newphrase + " )");
           
           res.writeHead(200, {'Content-Type': 'text/html'});
+          res.write(query1 + '<br />');
+          res.write(query2 + '<br />');
           res.write('<b>Hey there!</b><br /><br />This is the default response. You are visitor #: ' + newcount);
           res.end();
           client.release();
