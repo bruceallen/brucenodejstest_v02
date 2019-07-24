@@ -70,7 +70,7 @@ var subjectlist = ([
 'HELL KROSS'  
 ]);
 
-var activity = pickRandom([
+var activitylist = ([
 'is yes anding',
 'is boinking',
 'is pity laughing at',
@@ -230,7 +230,7 @@ var activity = pickRandom([
 
 ]);
 
-var object = pickRandom([
+var objectlist = ([
  'you',
 'your dad',
 'a DILF',
@@ -433,7 +433,7 @@ express()
           newcount = currentitem.count + 1;
           
 //          pickRandom
-          var randomStatus = (pickRandom(subjectlist) + ' ' + activity + ' ' + object + ' at #PackCon.');
+          var randomStatus = (pickRandom(subjectlist) + ' ' + pickRandom(activitylist) + ' ' + pickRandom(objectlist) + ' at #PackCon.');
           newphrase = "'" + randomStatus + "'";        
 //          newphrase = "'LITTLE TURTLE NUMBER " + newcount + "'";
           
