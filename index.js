@@ -58,7 +58,7 @@ express()
             } else {
               res.write('<b>phrase list:</b> ');    
               currentphraseitem = presult.rows[0];
-              if (currentphraseitem.count) {
+              if (currentphraseitem) {
                 res.write('<b>phrase:</b> ' + currentphraseitem.count);    
               } else {
                 res.write('empty');    
