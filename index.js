@@ -319,6 +319,8 @@ var objectlist = ([
 
 // SERVER SIDE CODE
 
+var bigphrase = '';
+
 express()
   .use(express.static(path.join(__dirname, 'public')))
   .set('views', path.join(__dirname, 'views'))
