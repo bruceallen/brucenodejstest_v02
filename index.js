@@ -449,7 +449,7 @@ express()
 //          res.write(query1 + '<br />');
 //          res.write(query2 + '<br />');
 //          res.write('<b>Hey there!</b><br /><br />This is the default response. You are visitor #: ' + newcount);
-          res.write('<br><br><br><button onclick="refreshPage()">Generate New PackCon Status</button><br><br></center>');
+          res.write('<br><br><br><button onclick="location.reload();">Generate New PackCon Status</button><br><br></center>');
           
           res.end();
           client.release();
