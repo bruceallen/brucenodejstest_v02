@@ -46,12 +46,19 @@ express()
       bigphrase = 'DBREAD<br />';
       const client = await pool.connect()
 
+      res.writeHead(200, {'Content-Type': 'text/html'});
+      res.write(bigphrase);
+      res.end();
+
       client.query("SELECT * FROM test_table", function (err, result, fields) {
         if (err) {
           console.error("UHUH");
         } else {
           currentitem = result.rows[0];          
           bigphrase = bigphrase + '<b>count:</b><br /><br />Count: ' + currentitem.count + '<br />';    
+
+          res.write(bigphrase);
+          res.end();
         }
       })
       
@@ -66,12 +73,11 @@ express()
           } else {
             bigphrase = bigphrase + 'iz empty ';
           }
+
+          res.write(bigphrase);
+          res.end();
         }
       })
-
-      res.writeHead(200, {'Content-Type': 'text/html'});
-      res.write(bigphrase);
-      res.end();
 
       client.release();
       
