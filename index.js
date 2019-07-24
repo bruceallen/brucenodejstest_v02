@@ -445,7 +445,7 @@ express()
           
           res.writeHead(200, {'Content-Type': 'text/html'});
           res.write('<center>');
-          res.write(randomStatus + '<br />');
+          res.write('<br />' + randomStatus + '<br />');
 //          res.write(query1 + '<br />');
 //          res.write(query2 + '<br />');
 //          res.write('<b>Hey there!</b><br /><br />This is the default response. You are visitor #: ' + newcount);
